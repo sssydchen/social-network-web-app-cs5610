@@ -11,52 +11,53 @@ import { useRouter } from 'next/navigation'
 import { useState } from 'react'
 
 const Page = () => {
-  // const router = useRouter()
+  const router = useRouter()
   const [input, setInput] = useState<string>('')
-  // const { loginToast } = useCustomToasts()
+  const { loginToast } = useCustomToasts()
 
-  // const { mutate: createCommunity, isLoading } = useMutation({
-  //   mutationFn: async () => {
-  //     const payload: CreateSubredditPayload = {
-  //       name: input,
-  //     }
+  const { mutate: createCommunity, isLoading } = useMutation({
+    mutationFn: async () => {
+      const payload: CreateSubredditPayload = {
+        name: input,
+      }
 
-  //     const { data } = await axios.post('/api/subreddit', payload)
-  //     return data as string
-  //   },
-  //   onError: (err) => {
-  //     if (err instanceof AxiosError) {
-  //       if (err.response?.status === 409) {
-  //         return toast({
-  //           title: 'Subreddit already exists.',
-  //           description: 'Please choose a different name.',
-  //           variant: 'destructive',
-  //         })
-  //       }
+      const { data } = await axios.post('/api/subreddit', payload)
+      return data as string
+    },
+    onError: (err) => {
+      if (err instanceof AxiosError) {
+        console.log("Axios error:", err)
+        if (err.response?.status === 409) {
+          return toast({
+            title: 'Subreddit already exists.',
+            description: 'Please choose a different name.',
+            variant: 'destructive',
+          })
+        }
 
-  //       if (err.response?.status === 422) {
-  //         return toast({
-  //           title: 'Invalid subreddit name.',
-  //           description: 'Please choose a name between 3 and 21 letters.',
-  //           variant: 'destructive',
-  //         })
-  //       }
+        if (err.response?.status === 422) {
+          return toast({
+            title: 'Invalid subreddit name.',
+            description: 'Please choose a name between 3 and 21 letters.',
+            variant: 'destructive',
+          })
+        }
 
-  //       if (err.response?.status === 401) {
-  //         return loginToast()
-  //       }
-  //     }
+        if (err.response?.status === 401) {
+          return loginToast()
+        }
+      }
 
-  //     toast({
-  //       title: 'There was an error.',
-  //       description: 'Could not create subreddit.',
-  //       variant: 'destructive',
-  //     })
-  //   },
-  //   onSuccess: (data) => {
-  //     router.push(`/r/${data}`)
-  //   },
-  // })
+      toast({
+        title: 'There was an error.',
+        description: 'Could not create subreddit.',
+        variant: 'destructive',
+      })
+    },
+    onSuccess: (data) => {
+      router.push(`/r/${data}`)
+    },
+  })
 
   return (
     <div className='container flex items-center h-full max-w-3xl mx-auto'>
@@ -84,7 +85,7 @@ const Page = () => {
           </div>
         </div>
 
-        {/* <div className='flex justify-end gap-4'>
+        <div className='flex justify-end gap-4'>
           <Button
             disabled={isLoading}
             variant='subtle'
@@ -97,7 +98,7 @@ const Page = () => {
             onClick={() => createCommunity()}>
             Create Community
           </Button>
-        </div> */}
+        </div>
       </div>
     </div>
   )
