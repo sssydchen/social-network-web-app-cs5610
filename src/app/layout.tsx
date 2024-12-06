@@ -7,7 +7,7 @@ import Providers from '@/components/Providers'
 import '@uploadthing/react/styles.css'
 
 export const metadata = {
-  title: 'Breadit',
+  title: 'Greennit',
   description: 'A Reddit clone built with Next.js and TypeScript.',
 }
 
