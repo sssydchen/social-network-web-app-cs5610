@@ -31,7 +31,6 @@ interface EditorOutputProps {
 
   const EditorOutput: FC<EditorOutputProps> = ({ content }) => {
     return (
-        // @ts-expect-error
         <Output
         data={content}
         style={style}

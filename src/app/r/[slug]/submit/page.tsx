@@ -4,15 +4,14 @@ import { Button } from "@/components/ui/Button"
 import Editor from "@/components/Editor"
 
 interface PageProps {
-  params: {
-    slug: string
-  }
+  params: Promise<{ slug: string }>;
 }
 
 const Page = async ({ params }: PageProps) => {
+  const { slug } = await params; 
   const subreddit = await db.subreddit.findFirst({
     where: {
-      name: params.slug,
+      name: slug,
     },
   })
 
@@ -27,7 +26,7 @@ const Page = async ({ params }: PageProps) => {
             Create Post
           </h3>
           <p className='ml-2 mt-1 truncate text-sm text-gray-500'>
-            in r/{params.slug}
+            in r/{slug}
           </p>
         </div>
       </div>

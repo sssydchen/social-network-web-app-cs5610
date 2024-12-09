@@ -3,7 +3,7 @@
 import EditorJS from '@editorjs/editorjs'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { usePathname, useRouter } from 'next/navigation'
-import { useCallback, useEffect, useRef, useState } from 'react'
+import { FC, useCallback, useEffect, useRef, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import TextareaAutosize from 'react-textarea-autosize'
 import { z } from 'zod'
@@ -75,12 +75,12 @@ const Editor: FC<EditorProps>= ({subredditId}) => {
                           uploader: {
                             async uploadByFile(file: File) {
                               // upload to uploadthing
-                              const [res] = await uploadFiles([file], 'imageUploader')
-            
+                              const [res] = await uploadFiles("imageUploader", { files: [file] });
+                              
                               return {
                                 success: 1,
                                 file: {
-                                  url: res.fileUrl,
+                                  url: res.url,
                                 },
                               }
                             },

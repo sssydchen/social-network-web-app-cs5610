@@ -12,23 +12,23 @@ import { Suspense } from "react"
 import CommentsSection from "@/components/CommentsSection"
 
 interface PageProps {
-    params: {
-        postId: string
-    }
+    params: Promise<{ postId: string }>;
 }
 
 export const dynamic = "force-dynamic"
 export const fetchCache = "force-no-store"
 
 const page = async ({ params }: PageProps) => {
-    const cachedPost = (await redis.hgetall(`post:${params.postId}`)) as CachedPost // get cached post from redis
+    const resolvedParams = await params; // Await params
+    const { postId } = resolvedParams;
+    const cachedPost = (await redis.hgetall(`post:${postId}`)) as CachedPost; // Use postId
 
     let post: (Post & { votes: Vote[]; author: User }) | null = null
 
     if (!cachedPost) {
         post = await db.post.findFirst({
             where: {
-                id: params.postId
+                id: (await params).postId
             },
             include: {
                 votes: true,
@@ -50,7 +50,7 @@ const page = async ({ params }: PageProps) => {
                     getData={async () => {
                         return await db.post.findUnique({
                             where: {
-                                id: params.postId
+                                id: (await params).postId
                             },
                             include: {
                                 votes: true

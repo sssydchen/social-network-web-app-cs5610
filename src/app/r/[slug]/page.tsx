@@ -6,9 +6,7 @@ import { notFound } from 'next/navigation'
 import PostFeed from '@/components/PostFeed'
 
 interface PageProps {
-  params: {
-    slug: string
-  }
+  params: Promise<{ slug: string }>;
 }
 
 const page = async ({ params }: PageProps) => {

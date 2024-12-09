@@ -15,12 +15,12 @@ export const metadata: Metadata = {
 
 const Layout = async ({
   children,
-  params: { slug },
+  params,
 }: {
   children: ReactNode
-  params: { slug: string }
+  params: Promise<{ slug: string }>
 }) => {
-
+  const { slug } = await params; 
   const session = await getAuthSession()
 
   const subreddit = await db.subreddit.findFirst({
