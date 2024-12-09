@@ -8,7 +8,7 @@ import { ArrowBigDown, ArrowBigUp } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import { useMutation } from '@tanstack/react-query'
 import axios, { AxiosError } from 'axios'
-import { PostVoteRequest } from '@/lib/validators/post'
+import { PostVoteRequest } from '@/lib/validators/vote'
 import { toast } from "@/hooks/use-toast"
 
 
