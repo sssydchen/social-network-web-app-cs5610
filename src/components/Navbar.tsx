@@ -16,7 +16,15 @@ const Navbar = () => {
       {/* search bar */}
       <SearchBar />
 
+
       <Link href="/sign-in" className={buttonVariants()}>Sign In</Link>
+
+      <Link
+        href="/team"
+        className={buttonVariants({ variant: "outline" })}
+      >
+        Team & GitHub
+      </Link>
 
     </div>
   </div>
