@@ -4,9 +4,10 @@ import { Inter } from "next/font/google"
 import Navbar from "@/components/Navbar"
 import { Provider } from '@radix-ui/react-toast'
 import Providers from '@/components/Providers'
+import '@uploadthing/react/styles.css'
 
 export const metadata = {
-  title: 'Breadit',
+  title: 'Greennit',
   description: 'A Reddit clone built with Next.js and TypeScript.',
 }
 

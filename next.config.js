@@ -4,8 +4,10 @@ const nextConfig = {
     domains: ['uploadthing.com', 'lh3.googleusercontent.com'],
   },
   experimental: {
-    appDir: true
-  }
+  },
+  env: {
+    NEXT_PUBLIC_UPLOAD_URL: process.env.NEXT_PUBLIC_UPLOAD_URL,
+  },
 }
 
 module.exports = nextConfig
