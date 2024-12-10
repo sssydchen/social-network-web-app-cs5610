@@ -1,4 +1,5 @@
 import { cn } from '@/lib/utils'
+import { Suspense } from "react";
 import '@/styles/globals.css'
 import { Inter } from "next/font/google"
 import Navbar from "@/components/Navbar"
@@ -27,7 +28,10 @@ export default function RootLayout({
         "bg - white text - slate - 900 antialiased light", inter.className)}>
       < body className="min-h-screen pt-12 bg0slate-50 antialiased" >
         <Providers>
+        <Suspense fallback={<div>Loading...</div>}>
+        {/* @ts-expect-error Async Server Component */}
           <Navbar />
+          </Suspense>
           {authModal}
 
           <div className='container max-w-7xl mx-auto h-full pt-12'>
