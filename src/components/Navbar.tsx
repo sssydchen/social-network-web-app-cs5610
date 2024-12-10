@@ -19,6 +19,7 @@ const Navbar = async () => {
       {/* search bar */}
       <SearchBar />
 
+
         {/* actions */}
         {session?.user ? (
           <UserAccountNav user={session.user} />
@@ -27,7 +28,14 @@ const Navbar = async () => {
             Sign In
           </Link>
         )}
-      </div>
+        <Link
+        href="/team"
+        className={buttonVariants({ variant: "outline" })}
+      >
+        Team & GitHub
+      </Link>
+
+    </div>
     </div>
 }
 
